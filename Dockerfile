@@ -9,7 +9,8 @@ RUN apt update \
   && make eventsapibeat \
   && mkdir /opt/eventsapibeat -p \
   && cp /go/events-api-elastic-2.4.0/bin/* /opt/eventsapibeat \
-  && cp /go/events-api-elastic-2.4.0/eventsapibeat-sample.yml /opt/eventsapibeat/eventsapibeat.yml \
+  && mkdir -p /etc/beats \
+  && cp /go/events-api-elastic-2.4.0/eventsapibeat-sample.yml /etc/beats/eventsapibeat.yml \
   && cd /go \
   && rm -rf /go/events-api-elastic-2.4.0 \
   && apt clean \
@@ -22,4 +23,4 @@ WORKDIR /opt/eventsapibeat
 
 STOPSIGNAL SIGTERM
 
-CMD /opt/eventsapibeat/eventsapibeat -c /opt/eventsapibeat/eventsapibeat.yml -e
+CMD /opt/eventsapibeat/eventsapibeat -c /etc/beats/eventsapibeat.yml -e
