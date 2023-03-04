@@ -10,7 +10,7 @@ RUN wget https://github.com/1Password/events-api-elastic/archive/refs/tags/v2.4.
   && mkdir /opt/eventsapibeat -p \
   && useradd -ms /bin/bash eventsapibeat \
   && chown -R 1000:1000 /opt/eventsapibeat \
-  && chmod 500 /opt/eventsapibeat/*
+  && chmod -R 500 /opt/eventsapibeat
 
 FROM gcr.io/distroless/static-debian11
 
