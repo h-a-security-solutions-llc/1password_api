@@ -7,7 +7,7 @@ RUN apt update \
   && tar xzvf v2.4.0.tar.gz \
   && cd events-api-elastic-2.4.0 \
   && make eventsapibeat \
-  && mkdir /opt/eventsapibeat -p \
+  && mkdir /opt/eventsapibeat/data -p \
   && cp /go/events-api-elastic-2.4.0/bin/* /opt/eventsapibeat \
   && mkdir -p /etc/beats \
   && cp /go/events-api-elastic-2.4.0/eventsapibeat-sample.yml /etc/beats/eventsapibeat.yml \
@@ -23,4 +23,4 @@ WORKDIR /opt/eventsapibeat
 
 STOPSIGNAL SIGTERM
 
-CMD /opt/eventsapibeat/eventsapibeat -c /etc/beats/eventsapibeat.yml -e
+CMD /opt/eventsapibeat/eventsapibeat -c /etc/beats/eventsapibeat.yml --path.data /opt/eventsapibeat/data -e
