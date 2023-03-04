@@ -1,0 +1,44 @@
+eventsapibeat:
+  insecure_skip_verify: false
+  signin_attempts:
+    enabled: true
+    auth_token: ""
+    sample_frequency: "10s"
+    cursor_state_file: "signinattempts.eventsapibeatstate"
+    starting_cursor: >
+      { "limit": 1000, "start_time": "2020-01-01T00:00:00Z" }
+  item_usages:
+    enabled: true
+    auth_token: ""
+    sample_frequency: "10s"
+    cursor_state_file: "itemusages.eventsapibeatstate"
+    starting_cursor: >
+      { "limit": 1000, "start_time": "2020-01-01T00:00:00Z" }
+
+output.logstash:
+  hosts: ["localhost:5044"]
+  ssl.certificate_authorities: ["/opt/eventsapibeat/ca.crt"]
+
+  # Certificate for SSL client authentication
+  ssl.certificate: "/opt/eventsapibeat/beats.crt"
+
+  # Client Certificate Key
+  ssl.key: "/opt/eventsapibeat/beats.key"
+  ssl.supported_protocols: [TLSv1.3]
+  ssl.verification_mode: full
+
+#output.console:
+#  pretty: true
+
+#output.elasticsearch:
+#  hosts: ["localhost:9200"]
+#  index: "%{[agent.type]}-%{[agent.version]}-%{[@metadata][event_type]}-%{+yyyy.MM}"
+#setup.ilm.enabled: false
+#setup.template.name: "eventsapibeat"
+#setup.template.pattern: "eventsapibeat-*"
+
+processors:
+  - add_fields:
+      target: ""
+      fields:
+        log_event_type: "1password"
