@@ -11,6 +11,11 @@ RUN apt update \
   && mkdir /etc/beats -p \
   && cp eventsapibeat /opt/eventsapibeat \
   && cp eventsapibeat-sample.yml /etc/beats/eventsapibeat.yml \
+  && cd /opt/eventsapibeat \
+  && rm eventsapibeat_2.4.0_linux_amd64.tar.gz \
+  && rm -rf linux_amd64 \
+  && apt remove git -y \
+  && apt clean \
   && useradd -ms /bin/bash eventsapibeat \
   && chown -R 1000:1000 /opt/eventsapibeat \
   && chmod -R 500 /opt/eventsapibeat
