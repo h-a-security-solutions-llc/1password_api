@@ -16,6 +16,8 @@ FROM gcr.io/distroless/static-debian11
 
 COPY --from=build /go/events-api-elastic-2.4.0/bin /opt/eventsapibeat
 COPY --from=build /go/events-api-elastic-2.4.0/eventsapibeat-sample.yml /etc/beats/eventsapibeat.yml
+COPY --from=build /etc/group /etc/group
+COPY --from=build /etc/passwd /etc/passwd
 
 USER eventsapibeat
 WORKDIR /opt/eventsapibeat
