@@ -4,14 +4,14 @@ eventsapibeat:
     enabled: true
     auth_token: ""
     sample_frequency: "10s"
-    cursor_state_file: "signinattempts.eventsapibeatstate"
+    cursor_state_file: "/opt/eventsapibeat/data/signinattempts.eventsapibeatstate"
     starting_cursor: >
       { "limit": 1000, "start_time": "2020-01-01T00:00:00Z" }
   item_usages:
     enabled: true
     auth_token: ""
     sample_frequency: "10s"
-    cursor_state_file: "itemusages.eventsapibeatstate"
+    cursor_state_file: "/opt/eventsapibeat/data/itemusages.eventsapibeatstate"
     starting_cursor: >
       { "limit": 1000, "start_time": "2020-01-01T00:00:00Z" }
 
